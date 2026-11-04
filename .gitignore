@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# OpenMC/DAGMC generated artefacts and raw geometry
+*.h5
+*.h5m
+*.vtk
+*.vtu
+*.stl
+*.step
+*.stp
+*.out
+model.xml
+tallies.out
+
+# Generated thermal-hydraulics case folders
+thermal_hydraulics/cases/
+thermal_hydraulics/scan_runs/
+
+# Credentials and local configuration
+.env
+*.pem
+*.key
+id_rsa
+
