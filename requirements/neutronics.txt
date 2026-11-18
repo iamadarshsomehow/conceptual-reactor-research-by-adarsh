@@ -1,0 +1,5 @@
+# Version pinning should be added after recording the environment used for the final runs.
+numpy
+openmc
+CoolProp
+matplotlib

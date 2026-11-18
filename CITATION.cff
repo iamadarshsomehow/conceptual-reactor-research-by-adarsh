@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this research artefact, please cite it as below."
+title: "Natural-Uranium Reactor Research"
+type: software
+authors:
+  - family-names: Hazra
+    given-names: Adarsh
+license: MIT
+date-released: 2026-11-18
+abstract: "Exploratory computational neutronics and thermal-hydraulics workflows for a conceptual natural-uranium reactor study."

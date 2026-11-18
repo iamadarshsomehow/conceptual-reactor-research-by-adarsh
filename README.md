@@ -5,6 +5,10 @@ Computational research artefacts for a conceptual natural-uranium reactor study.
 - **Neutronics** — OpenMC/DAGMC-based analyses of a baseline configuration and selected moderator-drain, loss-of-coolant, and void cases.
 - **Thermal-hydraulics** — a one-dimensional pressure-channel model using IAPWS-97 properties and an axial power distribution derived from the neutronics analysis.
 
+## Author
+
+Adarsh Hazra — 10th-grade student and nuclear-engineering enthusiast.
+
 ## Scope and status
 
 This is an exploratory computational research repository, not a validated reactor design, safety case, operating manual, or engineering specification. Results depend on modelling assumptions and should not be used for design, licensing, construction, or operation.
@@ -31,8 +35,6 @@ The thermal-hydraulics workflow is represented by its source, configuration, pow
 
 ## Before publication
 
-1. Select a license.
-2. Add author and citation metadata.
-3. Review every assumption and reported result against the underlying research record.
-4. Obtain appropriate review before making geometry, detailed design inputs, or raw statepoints public.
+1. Review every assumption and reported result against the underlying research record.
+2. Obtain appropriate review before making geometry, detailed design inputs, or raw statepoints public.
 

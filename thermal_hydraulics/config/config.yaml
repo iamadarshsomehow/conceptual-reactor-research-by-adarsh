@@ -1,0 +1,45 @@
+# config.yaml - every input for the 1D thermal-hydraulic model lives here.
+# Every value is an ASSUMPTION or a CAD measurement; the paper must say which.
+# NOTE: YAML needs a space after each colon (key: value).
+
+operating_point:
+  pressure_MPa: 10.0            # design boiling pressure
+  inlet_temp_C: 100.0           # subcooled inlet temperature (assumption)
+  channel_power_MW: 0.20        # heat generated in the fuel of this one channel (assumption; scanned by power_scan.py)
+  n_channels: 1                 # 18 rods sit inside ONE pressure tube
+  target_exit_quality: 0.07     # 7 percent steam by mass at exit (design choice)
+
+geometry:                       # per channel, all in metres
+  heated_length_m: 0.40         # rods are 400 mm long
+  flow_area_m2: 0.000890641
+  hydraulic_diameter_m: 0.003544
+  heated_perimeter_m: 0.7917    # 18 rods x 2*pi*0.007
+  n_rods: 18
+  fuel_outer_radius_m: 0.006
+  clad_inner_radius_m: 0.006
+  clad_outer_radius_m: 0.007
+  gap_conductance_W_m2K: 15000  # assumption: literature contact value (user-sourced, not verified by Claude); zero-gap contact
+
+materials:                      # thermal conductivities, assumptions (constant with temperature)
+  clad: E110 (Zr-1%Nb)
+  clad_conductivity_W_mK: 20
+  fuel: metallic natural uranium
+  fuel_conductivity_W_mK: 30
+
+power_shape:
+  power_map_csv: power_map.csv  # OpenMC mesh tally, kappa-fission; same folder as this file
+  axial_shape: openmc           # "openmc" = use the tally layers; "cosine" = conservative case
+  radial_peaking: null          # hot-channel power multiplier (null = average channel).
+                                # Flow stays fixed at the average-channel value, so exit quality rises.
+  fraction_to_coolant: 0.90     # ASSUMPTION: 10% of the fuel heat passes from the water to the D2O; fuel/clad flux unaffected
+
+limits:
+  fuel_temp_limit_C: 650        # upper literature bound (alpha-beta change ~668 C)
+  fuel_temp_limit_strict_C: 600 # lower literature bound, shown as second line
+  interface_temp_limit_C: 550   # fuel-clad chemical interaction limit (550-600 C); clad inner T used
+  min_chf_margin: 1.35
+  chf_derating_factor: 0.5      # multiplier on Biasi CHF for rod-bundle effects and correlation
+                                # uncertainty (assumption; 1.0 = trust Biasi as is)
+
+numerics:
+  n_axial_nodes: 50
