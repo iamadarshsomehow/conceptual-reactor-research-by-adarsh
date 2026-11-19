@@ -27,3 +27,9 @@ thermal_hydraulics/scan_runs/
 *.key
 id_rsa
 
+# Reviewed historical CAD exports explicitly kept in the version archive
+!development/versions/**/*.step
+!development/versions/**/*.stp
+!development/geometry/*.step
+!development/geometry/*.stp
+
