@@ -1,49 +1,49 @@
-# Natural-Uranium Reactor Research
+# Computational Synthesis of a Next Generation Reactor Core Architecture
 
-Computational research artefacts for a conceptual natural-uranium reactor study. The repository contains the two final workflows that emerged from an iterative development process:
-
-- **Neutronics** — OpenMC/DAGMC-based analyses of a baseline configuration and selected moderator-drain, loss-of-coolant, and void cases.
-- **Thermal-hydraulics** — a one-dimensional pressure-channel model using IAPWS-97 properties and an axial power distribution derived from the neutronics analysis.
+Student research project exploring a conceptual natural-uranium reactor core that combines nuclear-grade graphite and heavy-water moderation with light-water cooling. Prepared for the National Children's Science Congress 2026–27.
 
 ## Author
 
 Adarsh Hazra — 10th-grade student and nuclear-engineering enthusiast.
 
-## Scope and status
+## Project overview
 
-This is an exploratory computational research repository, not a validated reactor design, safety case, operating manual, or engineering specification. Results depend on modelling assumptions and should not be used for design, licensing, construction, or operation.
+The study explores whether a graphite-moderated core with a smaller heavy-water inventory could support a natural-uranium fuel cycle. It examines neutronics, heavy-water removal, coolant voiding, loss-of-coolant cases, and a one-dimensional thermal-hydraulics model for a fuel channel.
 
-Historical STEP CAD exports are included in `development/`. DAGMC mesh files, generated STL tessellations, and raw OpenMC statepoint files are not included. The repository preserves the design iterations while omitting large simulation artefacts; the STEP geometry still warrants review before any public release.
+The work began with paper sketches and STEP CAD geometry. The geometry was converted through a meshing and DAGMC workflow for OpenMC simulations. Neutronics results supplied an axial power distribution to the thermal-hydraulics model. This coupling is one-way: thermal results are not fed back into OpenMC.
 
-## Repository layout
+## Selected results reported in the study
+
+- A reflected single-block neutronics model gave `k-infinity = 1.05892 ± 0.00053`. Applying the project's assumed 3% leakage correction gives an estimated `k-effective ≈ 1.027`. This is the project's screening estimate, not a full-core calculation or a calculated leakage result.
+- In the modeled heavy-water drain cases, `k-infinity` decreased to `0.94371 ± 0.00046` at full drain. This indicates a reactivity reduction in the model; it does not demonstrate a practical passive shutdown system.
+- At 20% coolant void, the reported reactivity change was positive for both simplified single-cell models: `+379 ± 91 pcm` for the proposed design and `+173 ± 75 pcm` for the RBMK-type reference cell. These results do not establish full-core feedback behavior.
+- For the thermal-hydraulics base case (10 MPa and 0.2 MW per channel), the one-dimensional model reported a peak fuel-centre temperature of about 487 °C and a peak inner-cladding temperature of about 354 °C. These are estimates under assumed inputs, not validated reactor performance predictions.
+
+See [the neutronics results](neutronics/results/tables/) and [the thermal-hydraulics results](thermal_hydraulics/results/tables/) for saved tables. The RBMK-type model is a simplified reference comparison; its complete workflow is not yet reproducible from this repository.
+
+## Figures
+
+![Reported 0-to-20% coolant-void reactivity comparison and modeled boiling length. These are single-cell and one-dimensional model results.](neutronics/results/figures/void_effect_chart.png)
+
+![Thermal-hydraulics channel profiles for the modeled base case.](thermal_hydraulics/results/figures/channel_energy_balance.png)
+
+## Repository contents
 
 ```text
-neutronics/            OpenMC model source, workflows, compact results, and figures
-thermal_hydraulics/    Channel-model source, configuration, results, and figures
-docs/                  Methodology, assumptions, publication scope, and development history
-requirements/          Python package lists for the two workflows
-archive/               Curated record of the development process (not raw trial directories)
-development/           Version source, historical STEP exports, and one development-history page to be completed
+neutronics/            OpenMC model source, workflows, saved result tables, and figures
+thermal_hydraulics/    One-dimensional channel model, configuration, results, and figures
+development/           Development history, version source files, and historical STEP geometry
+docs/                  Methods, assumptions, benchmark scope, and reproducibility notes
+requirements/          Python package lists for the neutronics and thermal-hydraulics workflows
+archive/               Curated development material
 ```
 
-## Workflow relationship
+The development progression is summarized in [the development history](development/DEVELOPMENT_HISTORY.md). Md Sifath's CAD assistance is described in [Acknowledgments](docs/acknowledgments.md); the project author remains Adarsh Hazra.
 
-The neutronics workflow produces axial power information. `neutronics/data/axial_power_profile.csv` and `thermal_hydraulics/data/power_map.csv` preserve the compact data interface used by the thermal-hydraulics model.
+## Reproducibility and limitations
 
-## Development history
+The repository preserves source code, STEP geometry, compact result tables, and selected figures. It does not include the generated DAGMC `.h5m` geometry, raw OpenMC statepoints, tallies, or run folders. Rebuilding the neutronics geometry still requires some original conversion details. The thermal-hydraulics orchestration scripts also need their input paths connected to the repository's current folder layout, and the RBMK comparison workflow is incomplete here.
 
-The `development/versions/` archive contains the available model scripts and STEP geometry from the successive version folders. The single history page at `development/DEVELOPMENT_HISTORY.md` is reserved for Adarsh to explain the progression. Standalone project STEP exports are in `development/geometry/`. Generated STL meshes, raw simulation statepoints, and build/cache outputs remain excluded.
+This is an exploratory conceptual study, not a validated reactor design, safety analysis, engineering specification, or full-core calculation. The 3% leakage value is an assumption. Thermal-hydraulics results depend on the stated model and assumed inputs. Nothing in this repository should be used for reactor design, licensing, construction, or operation.
 
-## Reproduction status
-
-The thermal-hydraulics workflow is represented by its source, configuration, power map, compact results, and figures. The neutronics source is included for transparency, but full reruns require the withheld DAGMC geometry file and the appropriate OpenMC/DAGMC data environment. Supply the geometry path through `SOMUV4_H5M`; the fallback location is `private/somuv4.h5m`, which is ignored by Git. The leakage-corrected criticality is a simplified estimate, not a full-core calculation; see [the neutronics criticality estimate](docs/neutronics-benchmark.md), [publication scope](docs/publication-scope.md), and [assumptions and limitations](docs/assumptions-and-limitations.md).
-
-See the [reproducibility guide](docs/reproducibility.md) for software versions, STEP geometry inputs, workflow commands, output files, and the reported runtime.
-
-See [Acknowledgments](docs/acknowledgments.md) for a note about CAD assistance.
-
-## Before publication
-
-1. Review every assumption and reported result against the underlying research record.
-2. Obtain appropriate review before making geometry, detailed design inputs, or raw statepoints public.
-
+See the [reproducibility guide](docs/reproducibility.md), [neutronics benchmark scope](docs/neutronics-benchmark.md), [assumptions and limitations](docs/assumptions-and-limitations.md), and [publication scope](docs/publication-scope.md) for details.
