@@ -23,7 +23,7 @@ thermal_hydraulics/    Channel-model source, configuration, results, and figures
 docs/                  Methodology, assumptions, publication scope, and development history
 requirements/          Python package lists for the two workflows
 archive/               Curated record of the development process (not raw trial directories)
-development/           Version source, historical STEP exports, and per-version notes
+development/           Version source, historical STEP exports, and one development-history page to be completed
 ```
 
 ## Workflow relationship
@@ -32,7 +32,7 @@ The neutronics workflow produces axial power information. `neutronics/data/axial
 
 ## Development history
 
-The `development/versions/` archive contains the available model scripts and STEP geometry from the successive version folders. Every version folder has a `NOTES.md` page with space to record what changed, why, and what was learned. Standalone project STEP exports are in `development/geometry/`. Generated STL meshes, raw simulation statepoints, and build/cache outputs remain excluded.
+The `development/versions/` archive contains the available model scripts and STEP geometry from the successive version folders. The single history page at `development/DEVELOPMENT_HISTORY.md` is reserved for Adarsh to explain the progression. Standalone project STEP exports are in `development/geometry/`. Generated STL meshes, raw simulation statepoints, and build/cache outputs remain excluded.
 
 ## Reproduction status
 
