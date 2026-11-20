@@ -46,4 +46,4 @@ The repository preserves source code, STEP geometry, compact result tables, and 
 
 This is an exploratory conceptual study, not a validated reactor design, safety analysis, engineering specification, or full-core calculation. The 3% leakage value is an assumption. Thermal-hydraulics results depend on the stated model and assumed inputs. Nothing in this repository should be used for reactor design, licensing, construction, or operation.
 
-See the [reproducibility guide](docs/reproducibility.md), [neutronics benchmark scope](docs/neutronics-benchmark.md), [assumptions and limitations](docs/assumptions-and-limitations.md), and [publication scope](docs/publication-scope.md) for details.
+See the [report readiness notes](docs/report-readiness.md), [reproducibility guide](docs/reproducibility.md), [neutronics benchmark scope](docs/neutronics-benchmark.md), [assumptions and limitations](docs/assumptions-and-limitations.md), and [publication scope](docs/publication-scope.md) for details.
