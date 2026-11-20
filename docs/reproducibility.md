@@ -8,14 +8,16 @@ This guide records the software environment, geometry inputs, workflow commands,
 |---|---|
 | Operating system | Ubuntu 24.04 on WSL2 |
 | Compiler and build tools | GCC 13.3.0, CMake 3.28.3, Git 2.43.0 |
-| OpenMC | 0.16.1-dev8, commit `7ecd3a9`, built from source with DAGMC support; MPI, parallel HDF5, libMesh, and UWUW disabled |
+| OpenMC | 0.16.1.dev8, commit `7ecd3a9613f06ed0dc22368c9540faf4aaacc65f`, built from source with DAGMC; Python API matches the binary |
+| OpenMC build options | MPI, parallel HDF5, libMesh, and UWUW disabled |
+| DAGMC | 3.2.4 |
 | MOAB | 5.6.0 |
-| DAGMC | Approximately 3.2; exact release identifier remains to be recorded |
-| Python | 3.12.3, virtual environment named `nuclear-env` |
+| Python for neutronics | 3.12.3, virtual environment named `nuclear-env` |
+| Python for CAD conversion | Python 3.11, separate environment named `cad-to-openmc-env` |
 | Python packages | See `requirements/neutronics.txt` and `requirements/thermal-hydraulics.txt`; versions are not pinned in these files yet |
-| Nuclear data | ENDF/B-VII.1 HDF5 library for OpenMC |
+| Nuclear data | ENDF/B-VII.1 HDF5 library from the [official OpenMC data page](https://openmc.org/data/); 444 files in the `neutron/` directory |
 | CAD | Onshape, exported as STEP |
-| CAD-to-DAGMC conversion | `cad_to_openmc`, STL2 backend; exact package version remains to be recorded |
+| CAD-to-DAGMC conversion | `CAD_to_OpenMC` 1.0.1, STL2 backend; separate Python 3.11 environment |
 
 ## Environment setup
 
@@ -28,17 +30,25 @@ export OPENMC_CROSS_SECTIONS=/path/to/endfb-vii.1-hdf5/cross_sections.xml
 
 Install the native OpenMC, DAGMC, and MOAB stack using the versions/configuration above. Install the Python packages listed in the two requirements files. The exact package lock file can be added when a final `pip freeze` from the simulation environment is captured.
 
+The CAD conversion environment is separate from the OpenMC environment:
+
+```bash
+python3.11 -m venv cad-to-openmc-env
+source cad-to-openmc-env/bin/activate
+pip install CAD_to_OpenMC==1.0.1
+```
+
 ## Geometry and required inputs
 
 The repository shares the CAD geometry as STEP files. The final design STEP is `development/versions/somuv4/somuv4.step`; the RBMK-type comparison STEP is `development/versions/rbmkagain/benchmark.step`. Earlier versions and other STEP exports are preserved under `development/versions/` and `development/geometry/`.
 
-OpenMC consumes DAGMC `.h5m` files produced from the STEP geometry through the CAD-to-DAGMC conversion workflow. The generated `somuv4.h5m` and comparison `benchmark.h5m` files are not committed; build them locally from the corresponding STEP files. The design model expects the following DAGMC material tags to match the OpenMC material names exactly:
+STL2 is used as the meshing tool, then the material-tagged mesh is converted to DAGMC `.h5m` through the standard CAD_to_OpenMC workflow. OpenMC consumes those `.h5m` files. The generated `somuv4.h5m` and comparison `benchmark.h5m` files are not committed; build them locally from the corresponding STEP files. The assembly was created with `CAD_to_OpenMC.assembly` and `Assembly(["somuv4.step"])`; copy the original material-assignment and conversion setup lines into this guide if a fully line-by-line geometry rebuild recipe is needed. The design model expects the following DAGMC material tags to match the OpenMC material names exactly:
 
 `air`, `carrier`, `clad`, `d20`, `fuel`, `graphite`, `h20`, `pressure`
 
 The RBMK comparison model uses its own geometry/material tags; check the corresponding comparison model source when that workflow is added to this repository.
 
-The thermal-hydraulics input power map is `thermal_hydraulics/data/power_map.csv`. The ENDF/B-VII.1 library requires `cross_sections.xml` plus the referenced HDF5 data files. Check that the downloaded library archive is complete before extraction.
+The thermal-hydraulics input power map is `thermal_hydraulics/data/power_map.csv`. The ENDF/B-VII.1 library requires `cross_sections.xml` plus the referenced HDF5 data files. The reported library has 444 files under `neutron/`; check that the downloaded archive is complete before extraction. Add the library fingerprint/checksum if you have it recorded.
 
 The neutronics scripts accept the design geometry path through `SOMUV4_H5M`. The default local path is `private/somuv4.h5m`, which is ignored by Git. Set `SOMUV4_H5M` to your generated `.h5m` file if it is stored elsewhere.
 
