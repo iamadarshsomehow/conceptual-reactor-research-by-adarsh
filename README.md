@@ -6,6 +6,10 @@ Student research project exploring a conceptual natural-uranium reactor core tha
 
 Adarsh Hazra — 10th-grade student and nuclear-engineering enthusiast.
 
+## Acknowledgment
+
+I would like to thank Md Sifath for converting my reactor blueprints into STEP CAD geometry. After I shared the drawings and explained how the design was intended to fit together, he used his CAD skills to create the 3D model files. His work helped carry the project from paper sketches into CAD geometry for the later modelling work. Read the [full acknowledgment](docs/acknowledgments.md).
+
 ## Project overview
 
 The study explores whether a graphite-moderated core with a smaller heavy-water inventory could support a natural-uranium fuel cycle. It examines neutronics, heavy-water removal, coolant voiding, loss-of-coolant cases, and a one-dimensional thermal-hydraulics model for a fuel channel.
@@ -40,7 +44,7 @@ requirements/          Python package lists for the neutronics and thermal-hydra
 archive/               Curated development material
 ```
 
-The development progression is summarized in [the development history](development/DEVELOPMENT_HISTORY.md). Md Sifath's CAD assistance is described in [Acknowledgments](docs/acknowledgments.md); the project author remains Adarsh Hazra.
+The development progression is summarized in [the development history](development/DEVELOPMENT_HISTORY.md).
 
 ## Reproducibility and limitations
 
