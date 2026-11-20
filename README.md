@@ -13,7 +13,7 @@ Adarsh Hazra — 10th-grade student and nuclear-engineering enthusiast.
 
 This is an exploratory computational research repository, not a validated reactor design, safety case, operating manual, or engineering specification. Results depend on modelling assumptions and should not be used for design, licensing, construction, or operation.
 
-Raw CAD, mesh, and OpenMC statepoint files are intentionally not included in this first repository version. That keeps the public-facing material focused on methodology, code, compact derived data, and figures while the geometry and detailed design information undergo a separate publication review.
+Historical STEP CAD exports are included in `development/`. DAGMC mesh files, generated STL tessellations, and raw OpenMC statepoint files are not included. The repository preserves the design iterations while omitting large simulation artefacts; the STEP geometry still warrants review before any public release.
 
 ## Repository layout
 
@@ -36,7 +36,7 @@ The `development/versions/` archive contains the available model scripts and STE
 
 ## Reproduction status
 
-The thermal-hydraulics workflow is represented by its source, configuration, power map, compact results, and figures. The neutronics source is included for transparency, but full reruns require the withheld DAGMC geometry file and the appropriate OpenMC/DAGMC data environment. Supply the geometry path through `SOMUV4_H5M`; the fallback location is `private/somuv4.h5m`, which is ignored by Git. See [publication scope](docs/publication-scope.md) and [assumptions and limitations](docs/assumptions-and-limitations.md).
+The thermal-hydraulics workflow is represented by its source, configuration, power map, compact results, and figures. The neutronics source is included for transparency, but full reruns require the withheld DAGMC geometry file and the appropriate OpenMC/DAGMC data environment. Supply the geometry path through `SOMUV4_H5M`; the fallback location is `private/somuv4.h5m`, which is ignored by Git. The leakage-corrected criticality is a simplified estimate, not a full-core calculation; see [the neutronics criticality estimate](docs/neutronics-benchmark.md), [publication scope](docs/publication-scope.md), and [assumptions and limitations](docs/assumptions-and-limitations.md).
 
 ## Before publication
 
