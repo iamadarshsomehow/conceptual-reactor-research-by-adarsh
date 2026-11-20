@@ -38,6 +38,8 @@ The `development/versions/` archive contains the available model scripts and STE
 
 The thermal-hydraulics workflow is represented by its source, configuration, power map, compact results, and figures. The neutronics source is included for transparency, but full reruns require the withheld DAGMC geometry file and the appropriate OpenMC/DAGMC data environment. Supply the geometry path through `SOMUV4_H5M`; the fallback location is `private/somuv4.h5m`, which is ignored by Git. The leakage-corrected criticality is a simplified estimate, not a full-core calculation; see [the neutronics criticality estimate](docs/neutronics-benchmark.md), [publication scope](docs/publication-scope.md), and [assumptions and limitations](docs/assumptions-and-limitations.md).
 
+See the [reproducibility guide](docs/reproducibility.md) for software versions, STEP geometry inputs, workflow commands, output files, and the reported runtime.
+
 ## Before publication
 
 1. Review every assumption and reported result against the underlying research record.
