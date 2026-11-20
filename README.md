@@ -40,6 +40,8 @@ The thermal-hydraulics workflow is represented by its source, configuration, pow
 
 See the [reproducibility guide](docs/reproducibility.md) for software versions, STEP geometry inputs, workflow commands, output files, and the reported runtime.
 
+See [Acknowledgments](docs/acknowledgments.md) for a note about CAD assistance.
+
 ## Before publication
 
 1. Review every assumption and reported result against the underlying research record.
