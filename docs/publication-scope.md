@@ -10,4 +10,4 @@ The following are deliberately excluded pending separate review:
 - credentials, SSH material, personal configuration, and local paths;
 - uncurated trial-and-error directories.
 
-The remote repository will be created as private while detailed geometry and inputs undergo publication review.
+The GitHub repository is private while detailed geometry and inputs remain under publication review.

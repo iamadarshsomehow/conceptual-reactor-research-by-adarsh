@@ -20,4 +20,4 @@ The project's benchmark check was the 3% leakage check alone: apply the assumed 
 
 The 3% leakage assumption is not established by the reflected block model. The result is sensitive to geometry, material data, boundary conditions, nuclear data, and the leakage model. A finite bare-module OpenMC model with explicit leakage would test criticality without relying on this correction, but it was not part of the benchmark check used for this project.
 
-The report’s cited textbooks and code papers provide background for reactor analysis and computational methods, but the report does not identify a specific validated benchmark dataset or derive the 3% leakage value from a source. Record such a source and a reproducible comparison case here if one is added later.
+The report cites textbooks and code papers for background, but it does not identify a validated criticality benchmark dataset used to validate the model or a source deriving the 3% leakage value. The 3% value therefore remains a project assumption; no validated benchmark comparison is documented in this repository.

@@ -1,5 +1,4 @@
-"""Left: void reactivity effect (0 -> 20 % void). Right: how much of the heated channel length boils.
-Fill in the two BOILING numbers from your 1D thermal-hydraulics run, then: python make_void_chart.py"""
+"""Plot the reported 0-to-20% void reactivity effect and channel boiling lengths."""
 from math import sqrt
 import matplotlib
 matplotlib.use("Agg")
@@ -12,17 +11,14 @@ D = {
 }
 COL = {"Your design (10 MPa)": "#2a6fbb", "RBMK cell (7 MPa)": "#d9782d"}
 
-# ---------- boiling length from the T-H run (FILL THESE IN) ----------
+# ---------- boiling lengths reported by the thermal-hydraulics run ----------
 HEATED_LENGTH_M = 0.40
 BOILING_LENGTH_M = {            # length of channel where boiling occurs, metres
-    "Average channel": 0.035,    # e.g. 0.18
-    "Hot channel": 0.093,        # e.g. 0.25
+    "Average channel": 0.035,
+    "Hot channel": 0.093,
 }
 BOIL_COL = {"Average channel": "#2a6fbb", "Hot channel": "#a23b3b"}
 BOIL_CASE = "10 MPa, 0.2 MW, gap 15000 W/m2K"   # label the case you used
-
-if any(v is None for v in BOILING_LENGTH_M.values()):
-    raise SystemExit("Fill in BOILING_LENGTH_M (values in metres) from your T-H run first.")
 
 fig, (ax, bx) = plt.subplots(1, 2, figsize=(10.5, 4.8))
 

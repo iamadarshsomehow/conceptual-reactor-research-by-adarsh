@@ -28,7 +28,7 @@ source ~/nuclear-env/bin/activate
 export OPENMC_CROSS_SECTIONS=/path/to/endfb-vii.1-hdf5/cross_sections.xml
 ```
 
-Install the native OpenMC, DAGMC, and MOAB stack using the versions/configuration above. Install the Python packages listed in the two requirements files. The exact package lock file can be added when a final `pip freeze` from the simulation environment is captured.
+Install the native OpenMC, DAGMC, and MOAB stack using the versions/configuration above. The Python package lists are unpinned, and no package lock file or final `pip freeze` from the simulation environments is included.
 
 The CAD conversion environment is separate from the OpenMC environment:
 
@@ -42,13 +42,13 @@ pip install CAD_to_OpenMC==1.0.1
 
 The repository shares the CAD geometry as STEP files. The final design STEP is `development/versions/somuv4/somuv4.step`; the RBMK-type comparison STEP is `development/versions/rbmkagain/benchmark.step`. Earlier versions and other STEP exports are preserved under `development/versions/` and `development/geometry/`.
 
-STL2 is used as the meshing tool, then the material-tagged mesh is converted to DAGMC `.h5m` through the standard CAD_to_OpenMC workflow. OpenMC consumes those `.h5m` files. The generated `somuv4.h5m` and comparison `benchmark.h5m` files are not committed; build them locally from the corresponding STEP files. The assembly was created with `CAD_to_OpenMC.assembly` and `Assembly(["somuv4.step"])`; copy the original material-assignment and conversion setup lines into this guide if a fully line-by-line geometry rebuild recipe is needed. The design model expects the following DAGMC material tags to match the OpenMC material names exactly:
+STL2 is used as the meshing tool, then the material-tagged mesh is converted to DAGMC `.h5m` through the standard CAD_to_OpenMC workflow. OpenMC consumes those `.h5m` files. The generated `somuv4.h5m` and comparison `benchmark.h5m` files are not committed. The assembly was created with `CAD_to_OpenMC.assembly` and `Assembly(["somuv4.step"])`, but the original material-assignment and conversion setup commands were not fully preserved. As a result, this repository does not provide a complete line-by-line recipe for rebuilding the exact DAGMC geometry. The design model expects the following DAGMC material tags to match the OpenMC material names exactly:
 
 `air`, `carrier`, `clad`, `d20`, `fuel`, `graphite`, `h20`, `pressure`
 
-The RBMK comparison model uses its own geometry/material tags; check the corresponding comparison model source when that workflow is added to this repository.
+The historical RBMK comparison script is archived at `development/versions/rbmkagain/rbmkv2.py`. It uses a hard-coded local geometry path and is not wired into the current workflows. The separate `normalized_void.py` script is not included, so the RBMK comparison is not reproducible end to end from this repository.
 
-The thermal-hydraulics input power map is `thermal_hydraulics/data/power_map.csv`. The ENDF/B-VII.1 library requires `cross_sections.xml` plus the referenced HDF5 data files. The reported library has 444 files under `neutron/`; check that the downloaded archive is complete before extraction. Add the library fingerprint/checksum if you have it recorded.
+The thermal-hydraulics input power map is `thermal_hydraulics/data/power_map.csv`. The ENDF/B-VII.1 library requires `cross_sections.xml` plus the referenced HDF5 data files. The reported library has 444 files under `neutron/`. No checksum or fingerprint for that library is recorded in the files included here.
 
 The neutronics scripts accept the design geometry path through `SOMUV4_H5M`. The default local path is `private/somuv4.h5m`, which is ignored by Git. Set `SOMUV4_H5M` to your generated `.h5m` file if it is stored elsewhere.
 
@@ -66,11 +66,11 @@ Run commands from the repository root:
 
 The two sweep workflows support `--quick` for short test runs. `sweep_all.py --quick` uses 60 batches, 15 inactive, and 20,000 particles per batch. `drain_runs.py --quick` uses the same settings. No fixed random seed is set in these scripts.
 
-The RBMK comparison scripts `rbmk_benchmark_sweep.py` and `normalized_void.py` are not included in the current main workflow folders, so their run commands and outputs are not listed as reproducible workflows here.
+The archived RBMK model is `development/versions/rbmkagain/rbmkv2.py`. It currently evaluates only 0% and 20% void and contains a hard-coded local geometry path. The `normalized_void.py` post-processing script is not included. The repository therefore does not contain a complete RBMK sweep and result-regeneration workflow.
 
 ## Thermal-hydraulics workflows
 
-The thermal-hydraulics scripts are in `thermal_hydraulics/src/`; the configuration is in `thermal_hydraulics/config/config.yaml`, and the power map is in `thermal_hydraulics/data/power_map.csv`. In the current checkout, `run_cases.py` and `power_scan.py` expect `config.yaml` and `power_map.csv` alongside the scripts, while the repository stores them in separate folders. Their paths need to be connected before those two orchestration scripts can be run directly from this checkout. `channel.py` can be given the configuration path explicitly, but the power-map path in that configuration must resolve to the data file.
+The thermal-hydraulics scripts are in `thermal_hydraulics/src/`; the configuration is in `thermal_hydraulics/config/config.yaml`, and the power map is in `thermal_hydraulics/data/power_map.csv`. In the current checkout, `run_cases.py` and `power_scan.py` expect `config.yaml` and `power_map.csv` alongside the scripts, while the repository stores them in separate folders. These two scripts require manual path adjustments to run from the checkout as organized. `channel.py` accepts the configuration path explicitly, but the power-map path in that configuration must also resolve to the data file.
 
 | Script | Purpose | Main outputs |
 |---|---|---|

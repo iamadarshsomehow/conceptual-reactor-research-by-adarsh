@@ -1,4 +1,4 @@
-# Version pinning should be added after recording the environment used for the final runs.
+# Package versions are unpinned; see docs/reproducibility.md for the environment versions recorded for this study.
 numpy
 openmc
 CoolProp

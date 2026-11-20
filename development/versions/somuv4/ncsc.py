@@ -1,3 +1,8 @@
+"""Archived exploratory residual-analysis example; not used in the final workflow.
+
+This script expects a matching statepoint and named mesh tallies. Its example
+cross-section constants are illustrative and were not used for reported results.
+"""
 import numpy as np
 import openmc
 
@@ -14,8 +19,8 @@ nx, ny, nz = 10, 10, 10
 flux = flux_tally.get_values(value='mean').reshape((nx, ny, nz))
 fission = fission_tally.get_values(value='mean').reshape((nx, ny, nz))
 
-# 3. Define your macro cross-sections (Replace with your problem's materials/constants)
-# For a true residual, you compare the tally results against the deterministic balance
+# 3. Illustrative macroscopic cross-section constants for this archived example.
+# They are not material data for the final design or used in reported results.
 Sigma_t = 0.35   # Total Macroscopic Cross Section (cm^-1)
 nu_Sigma_f = 0.08 # Fission Production Cross Section (cm^-1)
 k_eff = sp.k_combined.nominal_value # The converged multiplication factor

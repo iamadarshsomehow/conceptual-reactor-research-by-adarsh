@@ -6,4 +6,4 @@ Included: 18 version/branch folders, their available Python/model source files a
 
 Excluded from this curated history: generated STL tessellations, OpenMC statepoints and summaries, build products, caches, and third-party library test data. Those accounted for most of the multi-gigabyte size of the original folders.
 
-The single development narrative belongs in [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md), which is intentionally left for Adarsh to fill in.
+The development narrative is recorded in [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md).

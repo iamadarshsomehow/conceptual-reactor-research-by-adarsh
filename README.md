@@ -19,7 +19,7 @@ The work began with paper sketches and STEP CAD geometry. The geometry was conve
 - At 20% coolant void, the reported reactivity change was positive for both simplified single-cell models: `+379 ± 91 pcm` for the proposed design and `+173 ± 75 pcm` for the RBMK-type reference cell. These results do not establish full-core feedback behavior.
 - For the thermal-hydraulics base case (10 MPa and 0.2 MW per channel), the one-dimensional model reported a peak fuel-centre temperature of about 487 °C and a peak inner-cladding temperature of about 354 °C. These are estimates under assumed inputs, not validated reactor performance predictions.
 
-See [the neutronics results](neutronics/results/tables/) and [the thermal-hydraulics results](thermal_hydraulics/results/tables/) for saved tables. The RBMK-type model is a simplified reference comparison; its complete workflow is not yet reproducible from this repository.
+See [the neutronics results](neutronics/results/tables/) and [the thermal-hydraulics results](thermal_hydraulics/results/tables/) for saved tables. The RBMK-type model is a simplified reference comparison; its complete workflow and raw run outputs are not included in this repository.
 
 ## Figures
 
@@ -42,7 +42,7 @@ The development progression is summarized in [the development history](developme
 
 ## Reproducibility and limitations
 
-The repository preserves source code, STEP geometry, compact result tables, and selected figures. It does not include the generated DAGMC `.h5m` geometry, raw OpenMC statepoints, tallies, or run folders. Rebuilding the neutronics geometry still requires some original conversion details. The thermal-hydraulics orchestration scripts also need their input paths connected to the repository's current folder layout, and the RBMK comparison workflow is incomplete here.
+The repository preserves source code, STEP geometry, compact result tables, and selected figures. It does not include the generated DAGMC `.h5m` geometry, raw OpenMC statepoints, tallies, or run folders. The original material-assignment and conversion commands were not fully preserved, so the exact DAGMC geometry cannot be rebuilt from this repository alone. The thermal-hydraulics orchestration scripts expect input paths that differ from the repository's current folder layout and require path adjustments to run. The RBMK comparison workflow and its raw outputs are not included.
 
 This is an exploratory conceptual study, not a validated reactor design, safety analysis, engineering specification, or full-core calculation. The 3% leakage value is an assumption. Thermal-hydraulics results depend on the stated model and assumed inputs. Nothing in this repository should be used for reactor design, licensing, construction, or operation.
 
