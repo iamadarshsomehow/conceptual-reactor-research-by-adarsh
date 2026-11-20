@@ -23,9 +23,11 @@ See [the neutronics results](neutronics/results/tables/) and [the thermal-hydrau
 
 ## Figures
 
-![Reported 0-to-20% coolant-void reactivity comparison and modeled boiling length. These are single-cell and one-dimensional model results.](neutronics/results/figures/void_effect_chart.png)
+![Modeled k-infinity and reactivity change as heavy water is drained, comparing the D2O-drain case with a case that also drains light water.](neutronics/results/figures/results_compare_plot.png)
 
 ![Thermal-hydraulics channel profiles for the modeled base case.](thermal_hydraulics/results/figures/channel_energy_balance.png)
+
+![Maximum fuel-centre and inner-cladding temperatures across the thermal-hydraulics sensitivity cases, shown with the study's stated temperature limits.](thermal_hydraulics/results/figures/cases_comparison.png)
 
 ## Repository contents
 
