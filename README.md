@@ -1,6 +1,6 @@
 # Computational Synthesis of a Next Generation Reactor Core Architecture
 
-Student research project exploring a conceptual natural-uranium reactor core that combines nuclear-grade graphite and heavy-water moderation with light-water cooling. Prepared for the National Children's Science Congress 2026–27.
+Student research project exploring a conceptual natural-uranium reactor core that combines nuclear-grade graphite and heavy-water moderation with light-water cooling.
 
 ## Author
 
